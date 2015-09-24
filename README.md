@@ -1,5 +1,7 @@
 # ext4klaxon
-Type Extensions for Klaxon (Kotlin JSON library)
+Type Extensions for [Klaxon](https://github.com/cbeust/klaxon) (Kotlin JSON library)
+
+[![Build Status](https://travis-ci.org/fboldog/ext4klaxon.svg)](https://travis-ci.org/fboldog/ext4klaxon)
 
 There is three extension for:
 - Long
