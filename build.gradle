@@ -1,0 +1,37 @@
+task wrapper(type: Wrapper) {
+   gradleVersion = '2.7'
+}
+
+buildscript {
+    ext.kotlinVersion = '0.13.1514'
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+    }
+}
+
+apply plugin: 'jacoco'
+apply plugin: 'kotlin'
+
+repositories {
+    mavenLocal()
+	jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    compile 'com.beust:klaxon:0.15-SNAPSHOT'
+
+    testCompile 'org.testng:testng:6.9.4'
+}
+
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+test {
+    useTestNG()
+}
