@@ -1,5 +1,5 @@
 task wrapper(type: Wrapper) {
-   gradleVersion = '2.7'
+    gradleVersion = '2.7'
 }
 
 buildscript {
@@ -9,15 +9,29 @@ buildscript {
     }
     dependencies {
         classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath ('com.jfrog.bintray.gradle:gradle-bintray-plugin:1.3.1')
     }
 }
 
 apply plugin: 'jacoco'
 apply plugin: 'kotlin'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+
+//Workaround for 'Cannot configure the 'publishing' extension after it has been accessed.' error
+Properties publishProperties = new Properties()
+publishProperties.load(file('publish.properties').newInputStream())
+
+def publish = [
+        group: publishProperties.get('publish.group'),
+        name: publishProperties.get('publish.name'),
+        version: publishProperties.get('publish.version'),
+]
 
 repositories {
 	jcenter()
 }
+
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
@@ -25,6 +39,40 @@ dependencies {
 
     testCompile 'org.testng:testng:6.9.4'
 }
+
+publishing {
+    publications {
+        JCenterPublication(MavenPublication) {
+            from components.java
+
+            groupId = publish.group
+            artifactId = publish.name
+            version = publish.version
+        }
+    }
+}
+
+bintray {
+    user = project.properties.get('jcenter.personal.user')
+    key = project.properties.get('jcenter.personal.api_key')
+    publications = ['JCenterPublication']
+    pkg {
+        repo = 'maven'
+        group = publish.group
+        name = publish.name
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/fboldog/ext4klaxon.git'
+        labels = ['kotlin']
+        version {
+            name = publish.version
+            desc = 'Type Extensions for Klaxon'
+            released = new Date()
+            vcsTag = publish.version
+        }
+    }
+}
+
+task install(dependsOn: publishToMavenLocal)
 
 
 sourceSets {
@@ -34,3 +82,4 @@ sourceSets {
 test {
     useTestNG()
 }
+

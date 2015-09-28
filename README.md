@@ -32,3 +32,16 @@ val e = jsonObject.enumFromValues("fieldName", Enum.values())
 
 **ext4klaxon is under development.**
 
+Gradle:
+```groovy
+compile 'com.fboldog.ext4klaxon:ext4klaxon:0.1.0'
+```
+
+or Maven:
+```xml
+<dependency>
+  <groupId>com.fboldog.ext4klaxon</groupId>
+  <artifactId>ext4klaxon</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
