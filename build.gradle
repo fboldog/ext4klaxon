@@ -16,17 +16,12 @@ apply plugin: 'jacoco'
 apply plugin: 'kotlin'
 
 repositories {
-    maven {
-        url "https://jitpack.io"
-    }
 	jcenter()
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
-//    compile 'com.beust:klaxon:0.15'
-    compile 'com.github.fboldog:klaxon:08c490dc94'
-
+    compile 'com.beust:klaxon:0.15'
 
     testCompile 'org.testng:testng:6.9.4'
 }
