@@ -18,10 +18,9 @@ repositories {
 	jcenter()
 }
 
-
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
-    compile 'com.beust:klaxon:0.15'
+    compile 'com.beust:klaxon:0.16'
 
     testCompile 'org.testng:testng:6.9.4'
 }
