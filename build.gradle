@@ -1,15 +1,11 @@
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.7'
-}
-
 buildscript {
     ext.kotlinVersion = '0.13.1514'
     repositories {
         jcenter()
     }
     dependencies {
-        classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
-        classpath ('com.jfrog.bintray.gradle:gradle-bintray-plugin:1.3.1')
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.3.1'
     }
 }
 
@@ -17,16 +13,6 @@ apply plugin: 'jacoco'
 apply plugin: 'kotlin'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
-
-//Workaround for 'Cannot configure the 'publishing' extension after it has been accessed.' error
-Properties publishProperties = new Properties()
-publishProperties.load(file('publish.properties').newInputStream())
-
-def publish = [
-        group: publishProperties.get('publish.group'),
-        name: publishProperties.get('publish.name'),
-        version: publishProperties.get('publish.version'),
-]
 
 repositories {
 	jcenter()
@@ -39,6 +25,24 @@ dependencies {
 
     testCompile 'org.testng:testng:6.9.4'
 }
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+test {
+    useTestNG()
+}
+
+//Workaround for 'Cannot configure the 'publishing' extension after it has been accessed.' error
+Properties publishProperties = new Properties()
+publishProperties.load(file('publish.properties').newInputStream())
+
+def publish = [
+        group: publishProperties.get('publish.group'),
+        name: publishProperties.get('publish.name'),
+        version: publishProperties.get('publish.version'),
+]
 
 publishing {
     publications {
@@ -74,12 +78,6 @@ bintray {
 
 task install(dependsOn: publishToMavenLocal)
 
-
-sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
 }
-
-test {
-    useTestNG()
-}
-
