@@ -2,6 +2,7 @@ package com.fboldog.ext4klaxon
 
 import com.beust.klaxon.JsonObject
 import java.util.*
+import kotlin.text.Regex
 
 /**
  * This [this method][intStrict] returns proper conversion to [kotlin.Int]
@@ -65,5 +66,21 @@ inline fun <reified T: Enum<T>> JsonObject.enum(fieldName: String): Enum<T> {
     return when (value) {
         is String -> T::class.java.enumConstants.single {value == it.name }
         else -> value as T
+    }
+}
+
+/**
+ * This [this method][date] returns proper conversion to [java.lang.Date]
+ * from type [kotlin.String] or [kotlin.Number]
+ * @param fieldName [kotlin.String] required value name
+ * @return [java.lang.Date] of value from field
+ */
+public fun JsonObject.date(fieldName: String) : Date? {
+    val value = get(fieldName)
+    return when (value) {
+        is String -> if(value.matches(Regex("^[0-9]+$"))) Date(longStrict(fieldName)!!.times(1000))
+            else throw ClassCastException("value (String) is not convertable to Date by Long")
+        is Number -> Date(longStrict(fieldName)!!.times(1000))
+        else -> value as Date
     }
 }
