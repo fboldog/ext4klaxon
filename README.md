@@ -28,13 +28,21 @@ val e = jsonObject.enum<EnumType>("fieldName")
 val e = jsonObject.enumFromValues("fieldName", Enum.values())
 ```
 
+### Enum
+Get any whole Numeric as Date
+```kotlin
+val e = jsonObject.date("fieldName")
+```
+
+
+
 ## Download
 
 **ext4klaxon is under development.**
 
 Gradle:
 ```groovy
-compile 'com.fboldog.ext4klaxon:ext4klaxon:0.1.0'
+compile 'com.fboldog.ext4klaxon:ext4klaxon:0.2.0'
 ```
 
 or Maven:
@@ -42,6 +50,6 @@ or Maven:
 <dependency>
   <groupId>com.fboldog.ext4klaxon</groupId>
   <artifactId>ext4klaxon</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
 </dependency>
 ```
