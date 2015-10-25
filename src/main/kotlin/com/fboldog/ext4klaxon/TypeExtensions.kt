@@ -1,6 +1,7 @@
 package com.fboldog.ext4klaxon
 
 import com.beust.klaxon.JsonObject
+import java.util.*
 
 /**
  * This [this method][intStrict] returns proper conversion to [kotlin.Int]
@@ -43,7 +44,6 @@ public fun JsonObject.longStrict(fieldName: String) : Long? {
     }
 }
 
-fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array<T>): Enum<T> = type.single { get(fieldName) == it.name() }
 /**
  * This [this method][enumFromValues] returns proper conversion to [kotlin.Enum]
  * from type [kotlin.String]
@@ -51,6 +51,7 @@ fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array<T>): E
  * @param type [kotlin.Array] list of Enum<T> values
  * @return [kotlin.Enum] of value from field
  */
+public fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array<T>): Enum<T> = type.single { get(fieldName) == it.name }
 
 /**
  * This [this method][enum] returns proper conversion to [kotlin.Enum]
@@ -61,8 +62,8 @@ fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array<T>): E
  */
 inline fun <reified T: Enum<T>> JsonObject.enum(fieldName: String): Enum<T> {
     val value = get(fieldName)
-    return when(value){
-        is String -> T::class.java.enumConstants.single {value == it.name()}
+    return when (value) {
+        is String -> T::class.java.enumConstants.single {value == it.name }
         else -> value as T
     }
 }
