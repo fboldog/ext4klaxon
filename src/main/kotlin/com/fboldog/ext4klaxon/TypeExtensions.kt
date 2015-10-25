@@ -2,6 +2,13 @@ package com.fboldog.ext4klaxon
 
 import com.beust.klaxon.JsonObject
 
+/**
+ * This [this method][intStrict] returns proper conversion to [kotlin.Int]
+ * from this types [kotlin.Int], [kotlin.Long], [kotlin.Double], [kotlin.Float],
+ * [kotlin.String]:
+ * @param fieldName [kotlin.String] required value name
+ * @return [kotlin.Int] of value from field
+ */
 public fun JsonObject.intStrict(fieldName: String) : Int? {
     val value = get(fieldName)
     return when (value) {
@@ -16,6 +23,13 @@ public fun JsonObject.intStrict(fieldName: String) : Int? {
     }
 }
 
+/**
+ * This [this method][longStrict] returns proper conversion to [kotlin.Long]
+ * from this types [kotlin.Long], [kotlin.Int], [kotlin.Double], [kotlin.Float],
+ * [kotlin.String]:
+ * @param fieldName [kotlin.String] required value name
+ * @return [kotlin.Long] of value from field
+ */
 public fun JsonObject.longStrict(fieldName: String) : Long? {
     val value = get(fieldName)
     return when (value) {
@@ -30,7 +44,21 @@ public fun JsonObject.longStrict(fieldName: String) : Long? {
 }
 
 fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array<T>): Enum<T> = type.single { get(fieldName) == it.name() }
+/**
+ * This [this method][enumFromValues] returns proper conversion to [kotlin.Enum]
+ * from type [kotlin.String]
+ * @param fieldName [kotlin.String] required value name
+ * @param type [kotlin.Array] list of Enum<T> values
+ * @return [kotlin.Enum] of value from field
+ */
 
+/**
+ * This [this method][enum] returns proper conversion to [kotlin.Enum]
+ * from type [kotlin.String]
+ * @param fieldName [kotlin.String] required value name
+ * @param type [kotlin.Enum] list of Enum<T> values
+ * @return [kotlin.Enum] of value from field
+ */
 inline fun <reified T: Enum<T>> JsonObject.enum(fieldName: String): Enum<T> {
     val value = get(fieldName)
     return when(value){
