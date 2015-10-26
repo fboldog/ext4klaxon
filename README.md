@@ -42,7 +42,7 @@ val e = jsonObject.date("fieldName")
 
 Gradle:
 ```groovy
-compile 'com.fboldog.ext4klaxon:ext4klaxon:0.2.0'
+compile 'com.fboldog.ext4klaxon:ext4klaxon:0.2.1'
 ```
 
 or Maven:
@@ -50,6 +50,6 @@ or Maven:
 <dependency>
   <groupId>com.fboldog.ext4klaxon</groupId>
   <artifactId>ext4klaxon</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1</version>
 </dependency>
 ```
