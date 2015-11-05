@@ -31,4 +31,10 @@ class EnumExtensionTests {
         fail("cannot be there")
     }
 
+    @Test
+    fun enumValueFromFunction(){
+        val src = JsonObject(mapOf(Pair("string_to_enum", "ONE")))
+        fun getOneTwo(name: String) : OneTwo = OneTwo.valueOf(name)
+        src.enumFromFunction("string_to_enum", {ref->getOneTwo(ref)})
+    }
 }

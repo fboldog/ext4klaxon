@@ -58,13 +58,29 @@ public fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array
  * This [this method][enum] returns proper conversion to [kotlin.Enum]
  * from type [kotlin.String]
  * @param fieldName [kotlin.String] required value name
- * @param type [kotlin.Enum] list of Enum<T> values
  * @return [kotlin.Enum] of value from field
  */
 inline fun <reified T: Enum<T>> JsonObject.enum(fieldName: String): Enum<T> {
     val value = get(fieldName)
     return when (value) {
         is String -> T::class.java.enumConstants.single {value == it.name }
+        else -> value as T
+    }
+}
+
+
+/**
+ * This [this method][enumFromFunction] returns proper conversion to [kotlin.Enum]
+ * from type [kotlin.String]
+ * @param fieldName [kotlin.String] required value name
+ * @param function funtion reference which is takes [kotlin.String] and return [kotlin.Enum]
+ * @return [kotlin.Enum] of value from field
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <T: Enum<T>> JsonObject.enumFromFunction(fieldName: String, function: (String) -> T): T {
+    val value = get(fieldName)
+    return when (value) {
+        is String -> function(value)
         else -> value as T
     }
 }

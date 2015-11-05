@@ -29,6 +29,10 @@ val e = jsonObject.enum<EnumType>("fieldName")
 val e = jsonObject.enumFromValues("fieldName", Enum.values())
 ```
 
+```kotlin
+val e = jsonObject.enumFromFunction("fieldName", {f->function(f)})
+```
+
 ### Date
 Get any whole Numeric as Date
 ```kotlin
