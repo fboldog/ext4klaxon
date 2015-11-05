@@ -5,6 +5,7 @@ Type Extensions for [Klaxon](https://github.com/cbeust/klaxon) (Kotlin JSON libr
 * Long
 * Int
 * Enum
+* Date
 
 ### Long
 Get Long, Double, Float, String as Int, without loosing precision when it is convertable
@@ -33,7 +34,6 @@ Get any whole Numeric as Date
 ```kotlin
 val e = jsonObject.date("fieldName")
 ```
-
 
 
 ## Download
