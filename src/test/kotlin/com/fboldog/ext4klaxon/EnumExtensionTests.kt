@@ -14,7 +14,7 @@ class EnumExtensionTests {
     @Test
     fun enumValueFromValues() {
         val src = JsonObject(mapOf(Pair("string_to_enum", "ONE")))
-        assertEquals(OneTwo.ONE, src.enumFromValues("string_to_enum", OneTwo.values))
+        assertEquals(OneTwo.ONE, src.enumFromValues("string_to_enum", OneTwo.values()))
     }
 
     @Test

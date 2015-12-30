@@ -86,10 +86,10 @@ public fun <T: Enum<T>> JsonObject.enumFromFunction(fieldName: String, function:
 }
 
 /**
- * This [this method][date] returns proper conversion to [java.lang.Date]
+ * This [this method][date] returns proper conversion to [java.util.Date]
  * from type [kotlin.String] or [kotlin.Number]
  * @param fieldName [kotlin.String] required value name
- * @return [java.lang.Date] of value from field
+ * @return [java.util.Date] of value from field
  */
 public fun JsonObject.date(fieldName: String) : Date? {
     val value = get(fieldName)
