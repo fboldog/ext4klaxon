@@ -5,7 +5,7 @@ import org.testng.annotations.Test
 import java.util.*
 import kotlin.test.assertEquals
 
-public class DateExtensionTests {
+class DateExtensionTests {
 
     @Test
     fun dateValueFromLong() {

@@ -11,7 +11,7 @@ import kotlin.text.Regex
  * @param fieldName [kotlin.String] required value name
  * @return [kotlin.Int] of value from field
  */
-public fun JsonObject.intStrict(fieldName: String) : Int? {
+fun JsonObject.intStrict(fieldName: String) : Int? {
     val value = get(fieldName)
     return when (value) {
         is Long -> if (value <= Int.MAX_VALUE && value >= Int.MIN_VALUE) value.toInt()
@@ -32,7 +32,7 @@ public fun JsonObject.intStrict(fieldName: String) : Int? {
  * @param fieldName [kotlin.String] required value name
  * @return [kotlin.Long] of value from field
  */
-public fun JsonObject.longStrict(fieldName: String) : Long? {
+fun JsonObject.longStrict(fieldName: String) : Long? {
     val value = get(fieldName)
     return when (value) {
         is Int -> value.toLong()
@@ -52,7 +52,7 @@ public fun JsonObject.longStrict(fieldName: String) : Long? {
  * @param type [kotlin.Array] list of Enum<T> values
  * @return [kotlin.Enum] of value from field
  */
-public fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array<T>): Enum<T> = type.single { get(fieldName) == it.name }
+fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array<T>): Enum<T> = type.single { get(fieldName) == it.name }
 
 /**
  * This [this method][enum] returns proper conversion to [kotlin.Enum]
@@ -77,7 +77,7 @@ inline fun <reified T: Enum<T>> JsonObject.enum(fieldName: String): Enum<T> {
  * @return [kotlin.Enum] of value from field
  */
 @Suppress("UNCHECKED_CAST")
-public fun <T: Enum<T>> JsonObject.enumFromFunction(fieldName: String, function: (String) -> T): T {
+fun <T: Enum<T>> JsonObject.enumFromFunction(fieldName: String, function: (String) -> T): T {
     val value = get(fieldName)
     return when (value) {
         is String -> function(value)
@@ -91,7 +91,7 @@ public fun <T: Enum<T>> JsonObject.enumFromFunction(fieldName: String, function:
  * @param fieldName [kotlin.String] required value name
  * @return [java.util.Date] of value from field
  */
-public fun JsonObject.date(fieldName: String) : Date? {
+fun JsonObject.date(fieldName: String) : Date? {
     val value = get(fieldName)
     return when (value) {
         is String -> if(value.matches(Regex("^[0-9]+$"))) Date(longStrict(fieldName)!!.times(1000))
