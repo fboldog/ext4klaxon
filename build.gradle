@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlinVersion = '1.1.4-2'
+    ext.kotlinVersion = '1.1.4-3'
     ext.dokkaVersion = '0.9.15'
     repositories {
         jcenter()
@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}"
     compile 'com.beust:klaxon:0.32'
     testCompile 'org.testng:testng:6.10'
     testCompile "org.jetbrains.kotlin:kotlin-test:${kotlinVersion}"
