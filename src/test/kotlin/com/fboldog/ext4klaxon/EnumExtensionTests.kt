@@ -14,7 +14,7 @@ class EnumExtensionTests {
     @Test
     fun enumValueFromValues() {
         val src = JsonObject(mapOf(Pair("string_to_enum", "ONE")))
-        assertEquals(OneTwo.ONE, src.enumFromValues("string_to_enum", OneTwo.values()))
+        assertEquals(OneTwo.ONE, src.enum("string_to_enum", OneTwo.values()))
     }
 
     @Test
@@ -35,6 +35,6 @@ class EnumExtensionTests {
     fun enumValueFromFunction(){
         val src = JsonObject(mapOf(Pair("string_to_enum", "ONE")))
         fun getOneTwo(name: String) : OneTwo = OneTwo.valueOf(name)
-        src.enumFromFunction("string_to_enum", {ref->getOneTwo(ref)})
+        assertEquals(OneTwo.ONE, src.enum("string_to_enum", {ref->getOneTwo(ref)}))
     }
 }

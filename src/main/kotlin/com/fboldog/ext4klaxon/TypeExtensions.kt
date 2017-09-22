@@ -46,13 +46,13 @@ fun JsonObject.longStrict(fieldName: String) : Long? {
 }
 
 /**
- * This [this method][enumFromValues] returns proper conversion to [kotlin.Enum]
+ * This [this method][enum] returns proper conversion to [kotlin.Enum]
  * from type [kotlin.String]
  * @param fieldName [kotlin.String] required value name
  * @param type [kotlin.Array] list of Enum<T> values
  * @return [kotlin.Enum] of value from field
  */
-fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array<T>): Enum<T> = type.single { get(fieldName) == it.name }
+fun <T: Enum<T>> JsonObject.enum(fieldName: String, type: Array<T>): T = type.single { get(fieldName) == it.name }
 
 /**
  * This [this method][enum] returns proper conversion to [kotlin.Enum]
@@ -60,10 +60,10 @@ fun <T: Enum<T>> JsonObject.enumFromValues(fieldName: String, type: Array<T>): E
  * @param fieldName [kotlin.String] required value name
  * @return [kotlin.Enum] of value from field
  */
-inline fun <reified T: Enum<T>> JsonObject.enum(fieldName: String): Enum<T> {
+inline fun <reified T: Enum<T>> JsonObject.enum(fieldName: String): T {
     val value = get(fieldName)
     return when (value) {
-        is String -> T::class.java.enumConstants.single {value == it.name }
+        is String -> T::class.java.enumConstants.single { value == it.name }
         else -> value as T
     }
 }
@@ -77,7 +77,7 @@ inline fun <reified T: Enum<T>> JsonObject.enum(fieldName: String): Enum<T> {
  * @return [kotlin.Enum] of value from field
  */
 @Suppress("UNCHECKED_CAST")
-fun <T: Enum<T>> JsonObject.enumFromFunction(fieldName: String, function: (String) -> T): T {
+fun <T: Enum<T>> JsonObject.enum(fieldName: String, function: (String) -> T): T {
     val value = get(fieldName)
     return when (value) {
         is String -> function(value)
